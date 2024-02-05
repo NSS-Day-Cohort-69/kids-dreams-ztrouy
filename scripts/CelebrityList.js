@@ -18,3 +18,12 @@ export const Celebrities = () => {
     html += "</ol>"
     return html
 }
+
+
+document.addEventListener("click", (clickEvent) => {
+    const clickTarget = clickEvent.target
+
+    if (clickTarget.dataset.type === "celebrity") {
+        window.alert(`${clickTarget.innerText} is a ${clickTarget.dataset.sport} star`)
+    }
+})
