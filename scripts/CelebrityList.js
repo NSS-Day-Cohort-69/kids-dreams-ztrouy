@@ -9,7 +9,7 @@ export const Celebrities = () => {
         html += `<li 
                     data-id="${celebrity.id}" 
                     data-type="celebrity"
-                    data-sport="${celebrty.sport}"
+                    data-sport="${celebrity.sport}"
                     id="star--${celebrity.id}">
                     ${celebrity.name}
                 </li>`
