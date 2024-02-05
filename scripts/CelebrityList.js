@@ -5,7 +5,7 @@ const celebrities = getCelebrities()
 export const Celebrities = () => {
     let html = "<ol>"
 
-    for (const star of celebrities) {
+    for (const celebrity of celebrities) {
         html += `<li 
                     data-id="${celebrity.id}" 
                     data-type="celebrity"
