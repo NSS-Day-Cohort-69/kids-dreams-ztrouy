@@ -1,11 +1,12 @@
 title Kids' Dreams
 
+actor user
 participant index
 participant main
 participant kids
 participant celebrityList
 participant pairing
-participant database
+database database
 
 
 activate index
@@ -70,7 +71,7 @@ note over pairing:Initializes String `html` with an\nordered list opening HTML t
 loop Iterate through `kids`
 note over pairing:Initialize variable `kidsStar` to null
 loop Iterate through `celebrities`
-note over pairing:If celebrity.id matches kid.id,\nset `kidsStar` to the celebrity\nObject
+note over pairing:If celebrity.id matches\nkid.celebrityId, set `kidsStar`\nto the celebrity Object
 end
 note over pairing:Interpolate kid and `kidsStar`\nObject's data into Template\nString representing HTML for\na list item, and add to the\nString `html`
 end
@@ -88,19 +89,17 @@ space
 space 
 
 
-index->kids:Sends click event Object
+user->kids:Clicks on a kid HTML Element
 activate kids
-note over kids:If the target of the click event has the\nappropriate state, do the following
-note over kids:Interpolate Object data into a Template String
+note over kids:Interpolate Object data of HTML Element\ninto a Template String
 index<--kids:Invokes a window alert with the Template String as text
 deactivate kids
 space 
 
 
-index->celebrityList:Sends click event Object
+user->celebrityList:Clicks on a celebrity HTML Element
 activate celebrityList
-note over celebrityList:If the target of the click event has the\nappropriate state, do the following
-note over celebrityList:Interpolate Object data into a Template String
+note over celebrityList:Interpolate Object data of HTML Element\ninto a Template String
 index<--celebrityList:Invokes a window alert with the Template String as text
 deactivate celebrityList
 deactivate index
