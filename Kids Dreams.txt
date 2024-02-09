@@ -1,0 +1,106 @@
+title Kids' Dreams
+
+participant index
+participant main
+participant kids
+participant celebrityList
+participant pairing
+participant database
+
+
+activate index
+index->main:Calls main.js
+
+activate main
+space 
+
+
+main->index:Requests HTML Element with id "container"\nusing the .querySelector method
+main<--index:Returns HTML Element as an Object
+note over main:Assigns the returned Object\nto variable `mainContainer`
+
+
+main->kids:Invokes Kids()
+activate kids
+kids->database:Invokes getChildren()
+activate database
+kids<--database:Returns Array of Objects
+deactivate database
+note over kids:Sets variable `children` to the\nreturned Array of Objects
+note over kids:Initializes String `html` with an\nordered list opening HTML tag
+loop Iterate through `children`
+note over kids:Interpolate Object data into\nTemplate String representing\nHTML for a list item, and add\nto the String `html`
+end
+note over kids:Appends a closing ordered list\nHTML tag to the String `html`
+main<--kids:Returns String\n`html`
+deactivate kids
+space 
+
+
+main->celebrityList:Invokes Celebrities()
+activate celebrityList
+celebrityList->database:Invokes getCelebrities()
+activate database
+celebrityList<--database:Returns Array of Objects
+deactivate database
+note over celebrityList:Sets variable `celebrities` to the\nreturned Array of Objects
+note over celebrityList:Initializes String `html` with an\nordered list opening HTML tag
+loop Iterate through `celebrities`
+note over celebrityList:Interpolate Object data into\nTemplate String representing\nHTML for a list item, and add\nto the String `html`
+end
+note over celebrityList:Appends a closing ordered list\nHTML tag to the String `html`
+main<--celebrityList:Returns String\n`html`
+deactivate celebrityList
+space 
+
+
+main->pairing:Invokes Pairings()
+activate pairing
+pairing->database:Invokes getCelebrities()
+activate database
+pairing<--database:Returns Array of Objects
+deactivate database
+note over pairing:Sets variable `celebrities` to the\nreturned Array of Objects
+pairing->database:Invokes getChildren()
+activate database
+pairing<--database:Returns Array of Objects
+deactivate database
+note over pairing:Sets variable `children` to the\nreturned Array of Objects
+note over pairing:Initializes String `html` with an\nordered list opening HTML tag
+loop Iterate through `kids`
+note over pairing:Initialize variable `kidsStar` to null
+loop Iterate through `celebrities`
+note over pairing:If celebrity.id matches kid.id,\nset `kidsStar` to the celebrity\nObject
+end
+note over pairing:Interpolate kid and `kidsStar`\nObject's data into Template\nString representing HTML for\na list item, and add to the\nString `html`
+end
+note over pairing:Appends a closing ordered list\nHTML tag to the String `html`
+main<--pairing:Returns String\n`html`
+deactivate pairing
+space 
+
+
+note over main:Interpolate the return Strings from\nKids(), Celebrities(), and Pairings()\ninto a Template String representing\nHTML, and assign it to the variable\n`applicationHTML`
+index<--main:Injects the String `applicationHTML`\ninto the Object `mainContainer` using\nthe .innerHTML method
+deactivate main
+note right of index:Updates the DOM
+space 
+space 
+
+
+index->kids:Sends click event Object
+activate kids
+note over kids:If the target of the click event has the\nappropriate state, do the following
+note over kids:Interpolate Object data into a Template String
+index<--kids:Invokes a window alert with the Template String as text
+deactivate kids
+space 
+
+
+index->celebrityList:Sends click event Object
+activate celebrityList
+note over celebrityList:If the target of the click event has the\nappropriate state, do the following
+note over celebrityList:Interpolate Object data into a Template String
+index<--celebrityList:Invokes a window alert with the Template String as text
+deactivate celebrityList
+deactivate index
